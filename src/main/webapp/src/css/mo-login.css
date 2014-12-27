@@ -23,7 +23,7 @@
 	padding: 20px 0;
 	overflow: hidden;
 	position: relative;
-	min-height: 500px;
+	min-height: 300px;
 }
 .login-image{
 	display: inline-block;
@@ -32,7 +32,7 @@
 }
 
 .form{
-	padding: 8d0px 50px;
+	padding: 80px 50px;
 	width: 500px;
 }
 .form.div{
@@ -46,17 +46,36 @@
 	width: 30px;
 	display: inline-block;
 }
+.form-group .tips{
+	display: inline-block;
+	min-width: 350px;
+	margin-left: 15px;
+	color: #FF6500;
+}
+/**error icon**/
+.tips i.err{
+
+}
+/**error icon**/
+.tips i.ok{
+
+}
+
 .button-group{
 	margin-left: 43px;
 }
-
-.regbtn{
-	width: 150px;
+.button-group button{
+	color: #ffffff;
 }
+.button-group button:hover{
+	color: #139D4B;
+}
+
 .loginbtn{
 	width: 100px;
 	background: #139d4b;
 }
+
 .result-tip{
 	color:#df0007;
 	font-weight: 200;
@@ -66,3 +85,32 @@
 	border: 1px dashed #df0007;
 }
 
+/**注册页面**/
+.register-form{
+	width: 100%;
+}
+
+.form-tip{
+	padding-left: 80px;
+	color: #dd5981;
+	visibility: hidden;
+}
+.pwd-tip{
+	padding-left: 62px;
+}
+.form-tip em{
+	padding: 0 35px;
+	background: #dd5981;
+	margin: 0 2px;
+	color: #ffffff;
+}
+.form-tip em.active{
+	background: #df3831;
+}
+.registerbtn{
+	 width: 120px;
+}
+
+.rule .rule-link{
+	color: #FF6500;
+}

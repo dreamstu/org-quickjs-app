@@ -1,6 +1,6 @@
 <#import '/inc/inc.htm' as inc />
 
-<@inc.header '首页'>
+<@inc.header '登录'>
 	<link href="${cssRoot}/mo-login.css" rel="stylesheet">
 </@inc.header>
 
@@ -32,7 +32,7 @@
 				</div>
 				</#if>
 				<div class="form-group button-group">
-					<button class="regbtn" type="button">没有账号，注册一个？</button>
+					<a href="/register">没有账号，注册一个？</a>
 					<button class="ml10 loginbtn" type="submit">登录</button>
 				</div>
 			</form>

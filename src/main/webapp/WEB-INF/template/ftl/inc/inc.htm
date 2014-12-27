@@ -3,12 +3,14 @@
 <#if DEBUG?? && DEBUG>
   <#global appRoot = '${ctx}'>
   <#global jsRoot = '${ctx}/src/js'>
+  <#global seajsRoot = '${jsRoot}/seajs-module'>
   <#global cssRoot = '${ctx}/src/css'>
   <#global imgRoot = '${ctx}/src/img'>
 <#else>
   <#assign cdn = 'http://ue.17173cdn.com'>
   <#global appRoot = '${ctx}'>
   <#global jsRoot = '${ctx}/dist/js'>
+  <#global seajsRoot = '${jsRoot}/seajs-module'>
   <#global cssRoot = '${ctx}/dist/css'>
   <#global imgRoot = '${ctx}/dist/img'>
 </#if>
@@ -31,8 +33,9 @@
       var timestamp = new Date();
       window.GLOBAL = {
         CTX: '${ctx}',
-        STIC:'${jsRoot}',
-  		TIMESTAMP:timestamp.getFullYear()+timestamp.getMonth()+timestamp.getDate()+timestamp.getHours()+timestamp.getMinutes()
+        STIC: '${jsRoot}',
+        STIC_COM: '${jsRoot}/components',
+  		TIMESTAMP: timestamp.getFullYear()+timestamp.getMonth()+timestamp.getDate()+timestamp.getHours()+timestamp.getMinutes()
       };
     </script>
     <#nested>
