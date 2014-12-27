@@ -1,0 +1,65 @@
+<#include "/inc/global.htm">
+
+<#if DEBUG?? && DEBUG>
+  <#global appRoot = '${ctx}'>
+  <#global jsRoot = '${ctx}/src/js'>
+  <#global cssRoot = '${ctx}/src/css'>
+  <#global imgRoot = '${ctx}/src/img'>
+<#else>
+  <#assign cdn = 'http://ue.17173cdn.com'>
+  <#global appRoot = '${ctx}'>
+  <#global jsRoot = '${ctx}/dist/js'>
+  <#global cssRoot = '${ctx}/dist/css'>
+  <#global imgRoot = '${ctx}/dist/img'>
+</#if>
+
+<#macro header title>
+  <!DOCTYPE HTML>
+  <html>
+  <head>
+    <title>${title!''}</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<#-- <link href="${cssRoot}/bootstrap.min.css" rel="stylesheet"> -->
+	<link href="${cssRoot}/base/base.css" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+ 		<script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+ 		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <script>
+      var timestamp = new Date();
+      window.GLOBAL = {
+        CTX: '${ctx}',
+        STIC:'${jsRoot}',
+  		TIMESTAMP:timestamp.getFullYear()+timestamp.getMonth()+timestamp.getDate()+timestamp.getHours()+timestamp.getMinutes()
+      };
+    </script>
+    <#nested>
+
+  </head>
+</#macro>
+
+<#macro body menu="菜单名" cls="page">
+  <body>
+  	<#include '/inc/header.htm'>
+  	<div class="${cls}">
+  		<div id="main">
+		    <div class="wrapper">
+		      <section>
+		        <div class="content-wrapper">
+		          <#nested>
+		        </div>
+		      </section>
+		    </div>
+	    </div>
+    </div>
+</#macro>
+
+<#macro footer>
+  <#include '/inc/script.htm'>
+    <script>//seajs.use();</script>
+    <#nested>
+    </body>
+    </html>
+</#macro>

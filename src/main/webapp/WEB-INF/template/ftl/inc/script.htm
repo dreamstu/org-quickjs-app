@@ -1,0 +1,12 @@
+<script src="${jsRoot}/jq.min.js"></script>
+<#-- <script src="${jsRoot}/bootstrap.min.js"></script> -->
+<script src="${jsRoot}/sea.js"></script>
+<#if DEBUG?? && DEBUG>
+<script src="${jsRoot}/sea_config.js"></script>
+<#else>
+<script>
+	seajs.config({
+	  base: '${jsRoot}'
+	});
+</script>
+</#if>

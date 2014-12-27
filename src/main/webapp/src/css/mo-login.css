@@ -1,0 +1,68 @@
+.course-tools{
+	height: 50px;
+	background: #fff;
+	padding: 0 20px;
+}
+
+.course-tools h2{
+	padding:10px 0;
+	line-height:29px;
+	height: 29px;
+	color: #99a1a6;
+	font-size: 14px;
+	border-bottom: 1px solid #d0d6d9;
+}
+
+.course-tools h2 strong{
+	font-size: 14px;
+	font-weight: normal;
+	color: #14191e;
+}
+
+.course-list{
+	padding: 20px 0;
+	overflow: hidden;
+	position: relative;
+	min-height: 500px;
+}
+.login-image{
+	display: inline-block;
+	padding-left: 200px;
+	text-align: center;
+}
+
+.form{
+	padding: 8d0px 50px;
+	width: 500px;
+}
+.form.div{
+	padding: 0 20px;
+}
+.form-group{
+	padding: 10px 20px;
+}
+.form-group label{
+	padding-right: 10px;
+	width: 30px;
+	display: inline-block;
+}
+.button-group{
+	margin-left: 43px;
+}
+
+.regbtn{
+	width: 150px;
+}
+.loginbtn{
+	width: 100px;
+	background: #139d4b;
+}
+.result-tip{
+	color:#df0007;
+	font-weight: 200;
+	width: 240px;
+	margin-left: 43px;
+	padding-left: 20px;
+	border: 1px dashed #df0007;
+}
+

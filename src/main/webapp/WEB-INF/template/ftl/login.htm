@@ -1,0 +1,46 @@
+<#import '/inc/inc.htm' as inc />
+
+<@inc.header '首页'>
+	<link href="${cssRoot}/mo-login.css" rel="stylesheet">
+</@inc.header>
+
+<@inc.body menu="登录页面" cls="container">
+	
+	<div class="course-tools">
+        <h2>
+			<span><strong>登录</strong></span>
+		</h2>
+    </div>
+    
+    <div class="course-list" style="margin-top: 0px;">
+    	<div class="js-course-list fn-clear">
+			<div class="login-image">
+				<img src="https://s.tbcdn.cn/apps/login/static/img/login_abc.png">
+			</div>
+    		<form class="form fn-right" action="/login" method="POST">
+			 	<div class="form-group">
+			 		<label for="username">账户</label>
+			 		<input class="form-control" id="username" name="name" value="${result.dtos[0].name}"/>
+			 	</div>
+			 	<div class="form-group">
+			 		<label for="password">口令</label>
+			 		<input class="form-control" id="password" name="password"/>
+			 	</div>
+				<#if result.state && result.state!=0>
+				<div class="form-group">
+					<div class="result-tip">${result.msg}</div>
+				</div>
+				</#if>
+				<div class="form-group button-group">
+					<button class="regbtn" type="button">没有账号，注册一个？</button>
+					<button class="ml10 loginbtn" type="submit">登录</button>
+				</div>
+			</form>
+    	</div>
+    </div>
+</@inc.body>
+
+<@inc.footer>
+<script type="text/javascript">
+</script>
+</@inc.footer>

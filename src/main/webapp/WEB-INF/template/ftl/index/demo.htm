@@ -1,0 +1,35 @@
+<#import '/inc/inc.htm' as inc />
+
+<@inc.header 'demo'>
+
+</@inc.header>
+
+<@inc.body '面板'>
+  <h3>hello demo</h3>
+  <div class="act-pannel" style="margin:0 auto;">
+  	
+  </div>
+</@inc.body>
+
+<@inc.footer>
+<script type="text/javascript">
+	seajs.use('gallery/eggs/0.1.1/eggs',function(eggs){
+		eggs.init({
+			login:true,
+        	count:10,
+        	staticUrl:'${staticUrl}/Qs/gallery/',
+            triggerId: "act-golden-trigger",
+            targetId:'act-golden-pannel',
+            closeButton: ".act_golden_close",
+            lock:true,
+            hitCallback:function(count){
+	        	if(count>=0){
+	        		$('.count').text(count);
+	        	}else{
+	        		$('.count-tip').text('你没有可以用来砸蛋的幸运锤！');
+	        	}
+            }
+        });
+	});
+</script>
+</@inc.footer>
