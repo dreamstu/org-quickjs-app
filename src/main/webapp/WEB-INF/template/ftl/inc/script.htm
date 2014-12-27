@@ -3,10 +3,11 @@
 <script src="${jsRoot}/sea.js"></script>
 <#if DEBUG?? && DEBUG>
 <script src="${jsRoot}/sea_config.js"></script>
+<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 <#else>
 <script>
 	seajs.config({
-	  base: '${jsRoot}'
+	  base: '${seajsRoot}'
 	});
 </script>
 </#if>

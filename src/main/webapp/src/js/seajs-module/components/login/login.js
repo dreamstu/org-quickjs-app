@@ -144,4 +144,5 @@
     function setVilidatePass(context,value){
         $(context).data('pass',value);
     }
+
 })();

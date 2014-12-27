@@ -1,10 +1,11 @@
 ﻿seajs.config({
-	base:window.GLOBAL.STIC || 'http://static.qipeipu.com/Qs',
+	base:window.GLOBAL.SEA || 'http://static.qipeipu.com/Qs',
 	// 别名配置
 	alias: {
 		'$'				:	'jquery/1.7.2/jquery',
 	    'jquery'		:	'jquery/1.7.2/jquery',
-	    'seajs-text'	: 	'seajs/seajs-text/1.1.1/seajs-text',
+	    'seajs-text'	: 	'seajs/seajs-text/1.0.2/seajs-text',
+		'seajs-log'		:	'seajs/seajs-log/1.0.1/seajs-log',
 		'seajs-combo'	: 	'seajs/seajs-combo/1.0.0/seajs-combo',
 	    
 	    'core'			:	'gallery/core/0.1.1/core',
@@ -48,7 +49,7 @@
 
 	// 预加载项
 
-	preload: ['jquery', 'seajs-text','core'],
+	preload: ['jquery', 'seajs-text','seajs-log','components/common/common'],
 
 	// 调试模式
 	debug: true,
