@@ -25,7 +25,8 @@ module.exports = function(grunt){
         transport:{
             target:{
                 options:{
-                    alias:'<%= pkg.spm.alias %>',
+                    paths:['seajs-modules'],
+                    alias:'<%= pkg.alias %>',
                     idleading:prefix+'/<%= pkg.name%>/<%= pkg.version%>/'
                 },
                 files:[{
@@ -54,12 +55,17 @@ module.exports = function(grunt){
                 src:'<%=concat.dist.dest %>',
                 dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version%>/<%= pkg.name%>.js'
             }
+        },
+        copy:{
+            other:{
+                files:[{
+                    expand: true,
+                    src:['libs/*'],
+                    dest:'dist/libs/'
+                }]
+            }
         }
     });
-    /*grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-cmd-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-cmd-transport');*/
 
-    grunt.registerTask('default',['clean:pre','transport','concat','uglify','clean:end']);
+    grunt.registerTask('default',['clean:pre','transport','concat','uglify','copy','clean:end']);
 }
