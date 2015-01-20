@@ -1,25 +1,25 @@
 {
   "name": "modules",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description":"",
   "repository":"",
   "engines": {
     "node": ">=0.8.0"
   },
   "devDependencies": {
-    "async": "^0.9.0",
     "grunt": "~0.4.1",
-    "grunt-cmd-concat": "~0.2.7",
     "grunt-quick-transport": "^0.1.0",
     "grunt-contrib-clean": "~0.4.0",
+    "grunt-cmd-concat": "~0.2.7",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-qunit": "~0.2.1",
     "grunt-contrib-uglify": "~0.1.2",
-    "grunt-contrib-copy":"~0.7.0",
-    "grunt-legacy-util": "~0.2.0",
-    "grunt-legacy-log": "^0.1.1",
+    "grunt-contrib-watch": "~0.3.1",
     "load-grunt-tasks": "^0.4.0",
-    "lodash": "^2.4.1",
+    "time-grunt": "^0.4.0",
     "shelljs": "~0.3.0",
     "prompt":"0.2.6",
-    "time-grunt": "^0.4.0"
+    "quick-plugins":"1.0.4"
   }
 }

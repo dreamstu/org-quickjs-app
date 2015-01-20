@@ -25,14 +25,14 @@ module.exports = function(grunt){
         transport:{
             target:{
                 options:{
-                    paths:['seajs-modules'],
+                    /*paths:['seajs-modules'],*/
                     alias:'<%= pkg.alias %>',
                     idleading:prefix+'/<%= pkg.name%>/<%= pkg.version%>/'
                 },
                 files:[{
                     expand:true,
-                    debug:false,
-                    src:['**/*.js','**/*.css'],
+                    debug:true,
+                    src:['*.js','src/**/*.css','src/**/*.js','!Gruntfile.js'],
                     dest:'dist'
                 }]
             }
@@ -52,17 +52,32 @@ module.exports = function(grunt){
                 banner:'<%= banner%>'
             },
             dist:{
-                src:'<%=concat.dist.dest %>',
+                src:'<%= concat.dist.src %>',
                 dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version%>/<%= pkg.name%>.js'
+            },
+            src:{
+                files:[{
+                    expand: true,
+                    cwd:'dist/src',
+                    src:['**/*.js','**/*.css','!**/*-debug.js','!**/*-debug.css'],
+                    dest:'src-dist'
+                }]
             }
         },
         copy:{
-            other:{
+            src:{
                 files:[{
                     expand: true,
-                    src:['libs/*'],
-                    dest:'dist/libs/'
+                    cwd: 'src-dist/',
+                    src: '**',
+                    dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/src/'
                 }]
+            },
+            debug:{
+                expand: true,
+                cwd:'dist/',
+                src:['**/*-debug.js','**/*-debug.css'],
+                dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/'
             }
         }
     });

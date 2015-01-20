@@ -15,7 +15,6 @@ module.exports = function(quick) {
     var fs = require('fs');
     var path = require('path');
     var settings = require('./settings');
-    var helpers = require('./lib/helpers').init(quick);
     var prompt = require('prompt');
 
     var $cmd = '';
@@ -28,12 +27,18 @@ module.exports = function(quick) {
     var $dirs = [];
 
     exports.start = function(){
+
+    	shell.echo('\n开始拷贝构建配置文件到待构建目录:');
+    	shell.cp('-rf', ['node_modules','build.js','Gruntfile.js','settings.js','package.json'], $build+'/');
+    	quick.log.ok('\n构建配置文件已拷贝到待构建目录:');
+
+    	shell.echo('\n准备开始执行构建 ...');
         shell.echo('\n用户设定待构建目录:'+ $build);
         shell.cd($build);
         shell.echo('\n进入待构建目录 '+ $build);
-        
-        prompt.message = '[' + '?'.green + ']';
-        prompt.delimiter = ' ';
+
+        shell.echo("replace path.resolve('node_modules') to path.resolve('..', 'node_modules')");
+        shell.sed('-i', "path.resolve('node_modules')", "path.resolve('..', 'node_modules')", "node_modules/grunt/lib/grunt/task.js");
 
         if( !shell.test('-d', $logs) ){
             shell.mkdir($logs);
@@ -43,7 +48,7 @@ module.exports = function(quick) {
         //获取目标构建目录的可构建组件名称数组
         $dirs = exports.findModuleList($build);
 
-        shell.echo($dirs.join(', '));
+        quick.log.success('\n可构建的组建列表：'+$dirs.join(', '));
         shell.echo('\n共 '+$dirs.length+' 个组件');
         //询问式构建开始
         exports.main();
@@ -55,13 +60,17 @@ module.exports = function(quick) {
         return shell.ls('./').filter(function(file) {
             // 仅返回目录，并且过滤掉 node_modules 和 module-tpl 两个非组件目录
             // 以及其他一些特殊组件
-            return !/^(node_modules|module-tpl|jquery|seajs|class|events)$/i.test(file) && shell.test('-d', file);
+            return !/^(node_modules|jquery|seajs|class|events)$/i.test(file) && shell.test('-d', file);
         });
     };
 
     //构建循环逻辑
     exports.main = function(welocme){
-        quick.log.writeln().success((welocme || '请输入要构建的模块名')+'\t[全部构建请输入 all]:');
+
+        prompt.message = '[' + '?'.green + ']';
+        prompt.delimiter = ' ';
+
+        quick.log.success((welocme || '请输入要构建的模块名')+'\t[全部构建请输入 all]:\n');
 
         prompt.start();
 
@@ -74,6 +83,7 @@ module.exports = function(quick) {
                 }
             }
         };
+
         prompt.get(options,function (err, result) {
             $cmd = result.name;
             if ( $cmd === "all") {
@@ -95,7 +105,7 @@ module.exports = function(quick) {
                 }, 2000);
             } else {
                 shell.echo('\n输入错误或组件名不存在\n');
-                exports.main('请cx输入要构建的模块名');
+                exports.main('请重新输入要构建的模块名');
             }
         });
     };
@@ -131,10 +141,8 @@ module.exports = function(quick) {
                 }
 
                 shell.cd(name);
-                quick.log.warn(shell.pwd());
-                quick.log.warn(shell.ls());
 
-                shell.exec('sudo grunt', function(code, output) {
+                shell.exec('grunt', function(code, output) {
                     // 疑问 2013-04-11
                     // 仅执行 grunt 命令，可以得到完整的 output 内容
                     // 执行 grunt jshint 或 grunt qunit 就可不到完整的 output 内容，为什么？
@@ -175,7 +183,7 @@ module.exports = function(quick) {
             throw Error('getPkgVal(): JSON.parse error');
         }
     };
-
+    
     return exports;
 };
 
