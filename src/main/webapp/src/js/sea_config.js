@@ -49,7 +49,7 @@
 
 	// 预加载项
 
-	preload: ['jquery', 'seajs-text','seajs-log','components/common/common'],
+	preload: ['jquery', 'seajs-text','seajs-log','gallery/common/0.0.1/index'],
 
 	// 调试模式
 	debug: true,
