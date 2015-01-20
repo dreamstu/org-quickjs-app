@@ -132,27 +132,25 @@ module.exports = function(quick) {
 
             $versions.push( '"'+name+'": ["'+ version +'"]');
 
-            if ( $cmd === 'version' ) {
-                exports.run(dirs);
-            } else {
-                if ( name !== 'seajs' ) {
-                    // seajs 需要使用自己的构建文件
-                    shell.cp('-f', 'Gruntfile.js', name+'/');
-                }
+            shell.cd($build);//回到构建文件夹
 
-                shell.cd(name);
-
-                shell.exec('grunt', function(code, output) {
-                    // 疑问 2013-04-11
-                    // 仅执行 grunt 命令，可以得到完整的 output 内容
-                    // 执行 grunt jshint 或 grunt qunit 就可不到完整的 output 内容，为什么？
-
-                    if( output.indexOf('without errors') === -1 ){
-                        (output).to($logs+'/'+name+'.log');
-                    }
-                    exports.run(dirs);
-                });
+            if ( name !== 'seajs' ) {
+                // seajs 需要使用自己的构建文件
+                shell.cp('-f', 'Gruntfile.js', name+'/');
             }
+
+            shell.cd(name);
+
+            shell.exec('grunt', function(code, output) {
+                // 疑问 2013-04-11
+                // 仅执行 grunt 命令，可以得到完整的 output 内容
+                // 执行 grunt jshint 或 grunt qunit 就可不到完整的 output 内容，为什么？
+
+                if( output.indexOf('without errors') === -1 ){
+                    (output).to($logs+'/'+name+'.log');
+                }
+                exports.run(dirs);
+            });
         }else{
             fs.appendFile($logs+path.sep+'version.txt', '\t'+$versions.join('\n'));
             shell.echo('\n构建完毕.\n');

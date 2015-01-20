@@ -1,13 +1,14 @@
 <#include "/inc/global.htm">
 
 <#if DEBUG?? && DEBUG>
+  <#assign cdn = 'http://127.0.0.1:3000'>
   <#global appRoot = '${ctx}'>
   <#global jsRoot = '${ctx}/src/js'>
-  <#global seajsRoot = '${jsRoot}/seajs-module'>
+  <#global seajsRoot = '${cdn}'><#-- ${jsRoot}/seajs-module -->
   <#global cssRoot = '${ctx}/src/css'>
   <#global imgRoot = '${ctx}/src/img'>
 <#else>
-  <#assign cdn = 'http://ue.17173cdn.com'>
+  <#assign cdn = 'http://test.static.qipeipu.com'>
   <#global appRoot = '${ctx}'>
   <#global jsRoot = '${ctx}/dist/js'>
   <#global seajsRoot = '${jsRoot}/seajs-module'>
@@ -15,19 +16,20 @@
   <#global imgRoot = '${ctx}/dist/img'>
 </#if>
 
-<#macro header title model page>
+<#macro header title model version page>
   <!DOCTYPE HTML>
   <html>
   <head>
     <title>${title!''}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="Keywords" content="慕课网，移动端开发，IT技能培训，免费编程视频，php开发教程，web前端教程，在线编程学习，html5视频教程，css+div教程，ios开发培训，安卓开发教程" />
-    <meta name="Description" content="慕课网（IMOOC）拥有丰富的互联网师资力量，在这里我们提供免费的编程教学视频，并且与名师在线编程互动。慕课网为每一个人营造独特的学习氛围，让你从IT菜鸟晋升为优秀程序员不在是梦想。活跃在一线互联网公司的高级开发工程师与你一起学习和分享编程的快乐与进步，指导你成为编程高手的捷径，让你从IT菜鸟迅速晋升为优秀的程序员。"/>
+    <meta name="Keywords" content="" />
+    <meta name="Description" content=""/>
     <script type="text/javascript">
-      var OP_CONFIG={"module":"${model}","page":"${page}"};
+      <#if model?exists && version?exists && page?exists>
+      var OP_CONFIG={"module":"${model}","version":"version","page":"${page}"};
+      </#if>
     </script>
-	<#-- <link href="${cssRoot}/bootstrap.min.css" rel="stylesheet"> -->
 	<link href="${cssRoot}/base/base.css" rel="stylesheet">
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>

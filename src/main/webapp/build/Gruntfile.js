@@ -51,9 +51,13 @@ module.exports = function(grunt){
             options:{
                 banner:'<%= banner%>'
             },
-            dist:{
-                src:'<%= concat.dist.src %>',
-                dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version%>/<%= pkg.name%>.js'
+            main:{
+                files:[{
+                    expand: true,
+                    cwd:'dist/',
+                    src:['*.js','!*-debug.js'],
+                    dest:'../../../'+prefix+'/<%= pkg.name%>/<%= pkg.version%>/'
+                }]
             },
             src:{
                 files:[{
@@ -70,14 +74,14 @@ module.exports = function(grunt){
                     expand: true,
                     cwd: 'src-dist/',
                     src: '**',
-                    dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/src/'
+                    dest:'../../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/src/'
                 }]
             },
             debug:{
                 expand: true,
                 cwd:'dist/',
                 src:['**/*-debug.js','**/*-debug.css'],
-                dest:'../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/'
+                dest:'../../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/'
             }
         }
     });
