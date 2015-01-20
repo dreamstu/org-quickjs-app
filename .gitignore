@@ -1,9 +1,9 @@
 node_modules
 .npm-debug.log
 tmp
-.iml
+*.iml
 target
-.idea
+.idea/*
 .classpath
 .project
 .settings
