@@ -1,5 +1,5 @@
 ﻿seajs.config({
-	base:window.GLOBAL.SEA || 'http://static.qipeipu.com/Qs',
+	base:window.GLOBAL.SEA,
 	// 别名配置
 	alias: {
 		'$'				:	'jquery/1.7.2/jquery',

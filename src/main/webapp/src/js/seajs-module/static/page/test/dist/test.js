@@ -1,4 +1,4 @@
-define("gallery/test/0.1.0/test", [ "./src/module1", "./src/module2" ], function(require, exports, module) {
+define("../../../gallery/test/0.1.0/test", [ "./src/module1", "./src/module2" ], function(require, exports, module) {
     /*
  * test
  * https://github.com/dreamstu/org-quickjs-app

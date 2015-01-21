@@ -1,12 +1,7 @@
 <script src="${jsRoot}/sea.js" id="seajsnode"></script>
+<script src="${jsRoot}/sea_config.js"></script>
 <#if DEBUG?? && DEBUG>
-	<script src="${jsRoot}/sea_config.js"></script>
-	<script type="text/javascript">typeof(OP_CONFIG) != "undefined" && seajs.use("static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
+<script type="text/javascript">typeof(OP_CONFIG) != "undefined" && seajs.use(GLOBAL.GALLERY+"/"+OP_CONFIG.module+"/"+OP_CONFIG.name);</script>
 <#else>
-<script>
-	seajs.config({
-	  base: '${seajsRoot}'
-	});
-</script>
-<script type="text/javascript">typeof(OP_CONFIG) != "undefined" && seajs.use("gallery/"+OP_CONFIG.module+"/"+OP_CONFIG.version+"/"+OP_CONFIG.page);</script>
+<script type="text/javascript">typeof(OP_CONFIG) != "undefined" && seajs.use(GLOBAL.GALLERY+"/"+OP_CONFIG.module+"/"+OP_CONFIG.version+"/"+OP_CONFIG.name);</script>
 </#if>

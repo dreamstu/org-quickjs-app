@@ -1,4 +1,4 @@
-define("gallery/test/0.1.0/src/module2", [], function(require, exports, module) {
+define("../../../gallery/test/0.1.0/src/module2", [], function(require, exports, module) {
     /**
  * Created by johnkim on 15-1-20.
  */

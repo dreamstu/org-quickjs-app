@@ -190,3 +190,9 @@ button:hover{
 	background: #363c41;
 	list-style: none;
 }
+
+footer p{
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+}

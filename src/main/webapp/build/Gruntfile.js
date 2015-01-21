@@ -1,6 +1,5 @@
 'use strict';
 module.exports = function(grunt){
-    var prefix = 'gallery';
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
@@ -10,6 +9,11 @@ module.exports = function(grunt){
 
     grunt.initConfig({
         pkg:grunt.file.readJSON('package.json'),
+        config:{
+            dist:'dist',
+            prefix:'gallery',
+            dest:'../../../<%= config.prefix %>/<%= pkg.name%>/<%= pkg.version %>'
+        },
         banner:
             '/*'+
             '\n Copyright <%= grunt.template.today("yyyy")%>, Quickjs v1.0 dev'+
@@ -27,13 +31,13 @@ module.exports = function(grunt){
                 options:{
                     /*paths:['seajs-modules'],*/
                     alias:'<%= pkg.alias %>',
-                    idleading:prefix+'/<%= pkg.name%>/<%= pkg.version%>/'
+                    debug:false,
+                    idleading:'<%= config.dest %>/'
                 },
                 files:[{
                     expand:true,
-                    debug:true,
                     src:['*.js','src/**/*.css','src/**/*.js','!Gruntfile.js'],
-                    dest:'dist'
+                    dest:'<%= config.dist %>'
                 }]
             }
         },
@@ -54,15 +58,15 @@ module.exports = function(grunt){
             main:{
                 files:[{
                     expand: true,
-                    cwd:'dist/',
+                    cwd:'<%= config.dist %>/',
                     src:['*.js','!*-debug.js'],
-                    dest:'../../../'+prefix+'/<%= pkg.name%>/<%= pkg.version%>/'
+                    dest:'<%= config.dest %>/'
                 }]
             },
             src:{
                 files:[{
                     expand: true,
-                    cwd:'dist/src',
+                    cwd:'<%= config.dist %>/src',
                     src:['**/*.js','**/*.css','!**/*-debug.js','!**/*-debug.css'],
                     dest:'src-dist'
                 }]
@@ -74,14 +78,14 @@ module.exports = function(grunt){
                     expand: true,
                     cwd: 'src-dist/',
                     src: '**',
-                    dest:'../../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/src/'
+                    dest:'<%= config.dest %>/src/'
                 }]
             },
             debug:{
                 expand: true,
-                cwd:'dist/',
+                cwd:'<%= config.dist %>/',
                 src:['**/*-debug.js','**/*-debug.css'],
-                dest:'../../../'+prefix+'/<%= pkg.name%>/<%= pkg.version %>/'
+                dest:'<%= config.dest %>'
             }
         }
     });

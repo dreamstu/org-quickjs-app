@@ -17,7 +17,6 @@ module.exports = function(quick) {
     var settings = require('./settings');
     var prompt = require('prompt');
 
-    var $cmd = '';
     var $build = settings.build;
     var $logs = settings.logs;
     var $base = settings.pwd;
@@ -84,16 +83,22 @@ module.exports = function(quick) {
             }
         };
 
+        console.log(JSON.stringify(options));
+
         prompt.get(options,function (err, result) {
-            $cmd = result.name;
-            if ( $cmd === "all") {
-                quick.log.debug('all');
-            } else if ( shell.test('-d', $cmd) ) {
-                $dirs = [$cmd];
-            } else {
-                $dirs = [];
-            }
+            var $cmd = result.name;
+
             if ( $dirs.length ) {
+                if ( $cmd === "all") {
+                    quick.log.debug('all');
+                } else if ( shell.test('-d', $cmd) ) {
+                    $dirs = [$cmd];
+                } else {
+                    shell.echo('\n输入错误或组件名不存在\n');
+                    exports.main('请重新输入要构建的模块名');
+                    return;
+                }
+
                 shell.rm('-rf', settings.buildlog);
                 shell.echo('\n清理日志目录 :'+settings.buildlog+'\n');
                 setTimeout(function(){
@@ -102,10 +107,9 @@ module.exports = function(quick) {
                 }, 1000);
                 setTimeout(function(){
                     exports.run($dirs);
-                }, 2000);
+                }, 5000);
             } else {
-                shell.echo('\n输入错误或组件名不存在\n');
-                exports.main('请重新输入要构建的模块名');
+                shell.echo('\n没有可以构建的组件\n');
             }
         });
     };

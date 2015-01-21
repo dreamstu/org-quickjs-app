@@ -1,22 +1,40 @@
 <#include "/inc/global.htm">
 
+<#--ctx 工程对外访问路径-->
+<#assign ctx = ''>
+
 <#if DEBUG?? && DEBUG>
+  <#--cdn cdn加速缓存服务器地址-->
   <#assign cdn = 'http://127.0.0.1:3000'>
-  <#global appRoot = '${ctx}'>
+  <#--jsRoot js文件所在路径-->
   <#global jsRoot = '${ctx}/src/js'>
+  <#--seajsRoot seajs模块根路径-->
   <#global seajsRoot = '${cdn}'><#-- ${jsRoot}/seajs-module -->
+  <#--moduleRoot js模块文件所在路径（相对于seajs模块根路径）-->
+  <#global moduleRoot = 'static/page'>
+  <#--cssRoot css文件所在路径-->
   <#global cssRoot = '${ctx}/src/css'>
+  <#--imgRoot img文件所在路径-->
   <#global imgRoot = '${ctx}/src/img'>
 <#else>
   <#assign cdn = 'http://test.static.qipeipu.com'>
-  <#global appRoot = '${ctx}'>
   <#global jsRoot = '${ctx}/dist/js'>
   <#global seajsRoot = '${jsRoot}/seajs-module'>
-  <#global cssRoot = '${ctx}/dist/css'>
-  <#global imgRoot = '${ctx}/dist/img'>
+  <#global moduleRoot = 'gallery'>
+  <#global cssRoot = '${ctx}/src/css'>
+  <#global imgRoot = '${ctx}/src/img'>
 </#if>
 
-<#macro header title model version page>
+<#--
+  @title  声明header宏
+  @desc 整体网站头部风格，其中包含页面css脚手架的导入
+  @params
+    title：网页标题
+    model：网页需要加载的js模块所在文件夹路径
+    version：网页需要加载的js模块版本
+    name：网页需要加载的js模块名称
+-->
+<#macro header title model version name>
   <!DOCTYPE HTML>
   <html>
   <head>
@@ -26,8 +44,8 @@
     <meta name="Keywords" content="" />
     <meta name="Description" content=""/>
     <script type="text/javascript">
-      <#if model?exists && version?exists && page?exists>
-      var OP_CONFIG={"module":"${model}","version":"${version}","page":"${page}"};
+      <#if model?exists && version?exists && name?exists>
+      var OP_CONFIG={"module":"${model}","version":"${version}","name":"${name}"};
       </#if>
     </script>
 	<link href="${cssRoot}/base/base.css" rel="stylesheet">
@@ -40,9 +58,9 @@
       var timestamp = new Date();
       window.GLOBAL = {
         CTX: '${ctx}',
-        STIC: '${jsRoot}',
-        SEA:  '${seajsRoot}',
-        STIC_COM: '${jsRoot}/components',
+        JS: '${jsRoot}',
+        SEA:  '${seajsRoot}' || 'http://static.qipeipu.com/Qs',
+        GALLERY: '${moduleRoot}',
   		TIMESTAMP: timestamp.getFullYear()+timestamp.getMonth()+timestamp.getDate()+timestamp.getHours()+timestamp.getMinutes()
       };
     </script>
@@ -51,7 +69,13 @@
   </head>
 </#macro>
 
-<#macro body menu="菜单名" cls="page">
+<#--
+  @title  声明body宏
+  @desc 整体网站正文部分风格
+  @params
+    cls：指定最外层div的class，默认为：page
+-->
+<#macro body cls="page">
   <body>
   	<#include '/inc/header.htm'>
   	<div class="${cls}">
@@ -67,7 +91,14 @@
     </div>
 </#macro>
 
+
+<#--
+  @title  声明footer宏
+  @desc 整体网站尾部风格，其中包含页面js脚手架的导入
+  @params none
+-->
 <#macro footer>
+  <#include '/inc/footer.htm'>
   <#include '/inc/script.htm'>
     <#nested>
     </body>
