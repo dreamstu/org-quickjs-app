@@ -19,7 +19,6 @@ module.exports = function(quick) {
 
     var $build = settings.build;
     var $logs = settings.logs;
-    var $base = settings.pwd;
 
     var $isStart = false; // 是否开始构建
     var $versions = [];
@@ -82,8 +81,6 @@ module.exports = function(quick) {
                 }
             }
         };
-
-        console.log(JSON.stringify(options));
 
         prompt.get(options,function (err, result) {
             var $cmd = result.name;

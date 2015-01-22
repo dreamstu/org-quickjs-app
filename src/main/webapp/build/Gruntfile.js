@@ -12,7 +12,8 @@ module.exports = function(grunt){
         config:{
             dist:'dist',
             prefix:'gallery',
-            dest:'../../../<%= config.prefix %>/<%= pkg.name%>/<%= pkg.version %>'
+            id:'<%= config.prefix %>/<%= pkg.name%>/<%= pkg.version %>',
+            dest:'../../../<%= config.id %>'
         },
         banner:
             '/*'+
@@ -32,7 +33,7 @@ module.exports = function(grunt){
                     /*paths:['seajs-modules'],*/
                     alias:'<%= pkg.alias %>',
                     debug:false,
-                    idleading:'<%= config.dest %>/'
+                    idleading:'<%= config.id %>/'
                 },
                 files:[{
                     expand:true,

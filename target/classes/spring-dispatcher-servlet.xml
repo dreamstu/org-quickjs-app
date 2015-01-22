@@ -6,7 +6,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-	<context:property-placeholder location="classpath:ftl_global_variables.properties" ignore-unresolvable="true"/>
+	<!--<context:property-placeholder location="classpath:ftl_global_variables.properties" ignore-unresolvable="true"/>-->
 	
 	<bean id="viewResolver" class="org.quickjs.app.utils.view.AppViewResolver">
         <property name="defaultViewResolver" ref="beanNameViewResolver"/>
@@ -45,8 +45,6 @@
          <property name="freemarkerVariables">
              <map>
                 <entry key="xml_escape" value-ref="fmXmlEscape"/>
-                <entry key="ctx" value="${ctx}"></entry>
-                <entry key="staticUrl" value="${staticUrl}"></entry>
             </map>
          </property>
     </bean>
